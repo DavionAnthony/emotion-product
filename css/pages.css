@@ -118,26 +118,38 @@
 
 .wish-input-area {
   display: flex;
-  gap: var(--space-sm);
-  padding: var(--space-md);
+  align-items: stretch;
+  gap: 0;
+  margin: 12px;
+  margin-bottom: 8px;
   background: var(--color-card);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--color-border);
-  margin: var(--space-md);
-  margin-bottom: var(--space-sm);
   position: sticky;
   top: 0;
   z-index: 10;
 }
 
+.wish-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
 .wish-input {
   flex: 1;
+  min-width: 0;
+  width: 100%;
   font-family: var(--font-body);
-  font-size: var(--font-size-sm);
+  font-size: 15px;
   color: var(--color-text);
-  padding: var(--space-sm);
+  padding: 12px 0 12px 14px;
   background: transparent;
+  border: none;
+  outline: none;
+  line-height: 1.4;
 }
 
 .wish-input::placeholder {
@@ -147,15 +159,24 @@
 .wish-submit-btn {
   width: 44px;
   height: 44px;
+  min-width: 44px;
   border-radius: 50%;
   background: var(--color-accent);
   color: white;
-  font-size: 1.2rem;
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 6px 6px 6px 0;
+  line-height: 1;
   transition: all var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  box-sizing: border-box;
 }
 
 .wish-submit-btn:active {
