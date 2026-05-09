@@ -111,6 +111,9 @@
   position: relative;
   z-index: 1;
   padding-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .wish-input-area {
@@ -121,7 +124,11 @@
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--color-border);
-  margin-bottom: var(--space-lg);
+  margin: var(--space-md);
+  margin-bottom: var(--space-sm);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .wish-input {
