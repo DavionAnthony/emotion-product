@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#F5F0E8">
+  <title>无用星球</title>
+  <meta name="description" content="一个反焦虑、去爹味的情绪角落。不贩卖焦虑，不灌鸡汤，不教做人。">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="app-container">
+
+    <!-- ==================== 发呆处（首页） ==================== -->
+    <div id="page-home" class="page active">
+      <div class="home-main">
+        <div class="home-main-top">
+          <div class="home-logo">🫧</div>
+          <h1 class="home-title">无用星球</h1>
+          <p class="home-slogan">
+            一个不贩卖焦虑、不灌鸡汤、不教做人的地方。<br>
+            在这里，<br>
+            你的平庸被接纳，你的放弃被收容，<br>
+            你的愿望在星河里慢慢漂。
+          </p>
+          <div class="home-mood mood-banner">
+            <span class="home-mood-text">「今天你已经做得很好了。」</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-cards">
+        <div class="home-card" data-page="wish-galaxy">
+          <div class="home-card-icon">✨</div>
+          <div class="home-card-name">愿望星河</div>
+          <div class="home-card-desc">写下愿望，看它漂浮</div>
+        </div>
+        <div class="home-card" data-page="crash">
+          <div class="home-card-icon">🫂</div>
+          <div class="home-card-name">原来不只我</div>
+          <div class="home-card-desc">你的梦并不孤独</div>
+        </div>
+        <div class="home-card" data-page="conversion">
+          <div class="home-card-icon">🧮</div>
+          <div class="home-card-name">做到的人数</div>
+          <div class="home-card-desc">想做vs做到的真相</div>
+        </div>
+        <div class="home-card" data-page="museum">
+          <div class="home-card-icon">📦</div>
+          <div class="home-card-name">放弃收容站</div>
+          <div class="home-card-desc">放弃也值得被看见</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 愿望星河 ==================== -->
+    <div id="page-wish-galaxy" class="page">
+      <div class="wish-canvas-container">
+        <canvas id="wish-canvas"></canvas>
+      </div>
+
+      <div class="wish-content">
+        <div class="page-header">
+          <h1 class="page-title">愿望星河</h1>
+          <p class="page-subtitle">写下你想要的、想做的、想成为的。<br>金子一样的愿望会发光，灰白的也会慢慢漂。</p>
+        </div>
+
+        <div class="wish-input-area">
+          <input type="text" class="wish-input" placeholder="在星空中写下你的愿望…" maxlength="50">
+          <button class="wish-submit-btn" aria-label="提交愿望">✧</button>
+        </div>
+
+        <div class="wish-stats" id="wish-stats">
+          <!-- 由 JS 动态渲染 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 原来不只我 ==================== -->
+    <div id="page-crash" class="page">
+      <div class="page-header">
+        <h1 class="page-title">原来不只我</h1>
+        <p class="page-subtitle">输入一个你正在做的梦，看看有多少人也和你一样。</p>
+      </div>
+
+      <div class="crash-intro">
+        <p class="crash-tagline">「你不是一个人」</p>
+      </div>
+
+      <div class="crash-input-area">
+        <input type="text" class="crash-input" id="crash-input" placeholder="输入一个梦想或想法…" autocomplete="off">
+      </div>
+
+      <div class="crash-result" id="crash-result" style="display:none;">
+        <div class="card crash-result-card">
+          <div class="crash-result-number" id="crash-number">0</div>
+          <div class="crash-result-label">和你有同样想法的人数</div>
+          <div class="stat-bar">
+            <div class="stat-bar-fill" style="width:100%"></div>
+          </div>
+        </div>
+
+        <div class="crash-entries" id="crash-entries">
+          <!-- 由 JS 动态渲染 -->
+        </div>
+
+        <div style="text-align:center; padding: var(--space-md) 0;">
+          <button class="btn btn-primary crash-share-btn" style="display:none;">
+            📸 生成分享海报
+          </button>
+        </div>
+      </div>
+
+      <!-- 分享弹窗 -->
+      <div class="share-modal">
+        <div class="share-modal-content">
+          <h3 class="share-modal-title">原来不只我</h3>
+          <p class="share-modal-desc">长按图片保存到相册，分享给朋友</p>
+          <div class="share-preview">
+            <!-- 海报 Canvas 由 Poster.generate() 渲染到这里 -->
+          </div>
+          <div class="share-actions">
+            <button class="btn btn-ghost share-close-btn btn-full">关闭</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="crash-empty-hint" id="crash-empty">
+        <div class="empty-state">
+          <div class="empty-icon">🔍</div>
+          <div class="empty-text">搜索一个想法，看看有多少人和你一样</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 做到的人数 ==================== -->
+    <div id="page-conversion" class="page">
+      <div class="page-header">
+        <h1 class="page-title">做到的人数</h1>
+        <p class="page-subtitle">有些事情，想做的人很多，做到的人很少。<br>你不是一个人没坚持住，是这件事本来就难。</p>
+      </div>
+
+      <div class="page-content">
+        <div class="conversion-list" id="conversion-list">
+          <!-- 由 JS 动态渲染 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 放弃收容站 ==================== -->
+    <div id="page-museum" class="page">
+      <div class="page-header">
+        <h1 class="page-title">放弃收容站</h1>
+        <div class="museum-intro">
+          <p>「放弃没什么大不了的。」<br>这里收容的是别人的半途而废，<br>也是你随时可以取用的台阶。</p>
+        </div>
+      </div>
+
+      <div class="museum-list" id="museum-list">
+        <!-- 由 JS 动态渲染 -->
+      </div>
+
+      <div style="text-align:center; padding: var(--space-lg) 0;">
+        <button class="btn btn-ghost museum-refresh">🔄 换一批故事</button>
+      </div>
+
+      <div class="empty-state">
+        <div class="empty-icon">📝</div>
+        <div class="empty-text">你也有一个放弃的故事吗？<br><span style="font-size:0.75rem;color:var(--color-text-light)">嘘，不说也没关系。</span></div>
+      </div>
+    </div>
+
+    <!-- ==================== 底部导航 ==================== -->
+    <nav class="bottom-nav">
+      <div class="nav-item active" data-page="home">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">发呆处</span>
+      </div>
+      <div class="nav-item" data-page="crash">
+        <span class="nav-icon">🫂</span>
+        <span class="nav-label">不只我</span>
+      </div>
+      <div class="nav-item" data-page="wish-galaxy">
+        <span class="nav-icon">✨</span>
+        <span class="nav-label">星河</span>
+      </div>
+      <div class="nav-item" data-page="conversion">
+        <span class="nav-icon">🧮</span>
+        <span class="nav-label">做到</span>
+      </div>
+      <div class="nav-item" data-page="museum">
+        <span class="nav-icon">📦</span>
+        <span class="nav-label">收容站</span>
+      </div>
+    </nav>
+
+  </div><!-- /app-container -->
+
+  <!-- JS -->
+  <script src="js/utils.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/effects/particles.js"></script>
+  <script src="js/effects/poster.js"></script>
+  <script src="js/pages/home.js"></script>
+  <script src="js/pages/wish-galaxy.js"></script>
+  <script src="js/pages/crash-report.js"></script>
+  <script src="js/pages/conversion.js"></script>
+  <script src="js/pages/museum.js"></script>
+
+  <script>
+    // 初始化应用
+    document.addEventListener('DOMContentLoaded', function () {
+      // 底部导航点击
+      document.querySelectorAll('.nav-item').forEach(function (item) {
+        item.addEventListener('click', function () {
+          Router.go(this.dataset.page);
+        });
+      });
+
+      // 注册路由
+      Router.init({
+        home: {
+          render: function () { Home.render(); }
+        },
+        'wish-galaxy': {
+          render: function () { WishGalaxy.render(); }
+        },
+        crash: {
+          render: function () { CrashReport.render(); }
+        },
+        conversion: {
+          render: function () { Conversion.render(); }
+        },
+        museum: {
+          render: function () { Museum.render(); }
+        }
+      });
+
+      console.log('🫧 无用星球已启动');
+    });
+  </script>
+</body>
+</html>
